@@ -96,6 +96,38 @@ task :page do
   end
 end # task :page
 
+# Usage: rake project title="Project Title" description="Project description"
+desc "Create a new project site page."
+task :project do
+  title = ENV["title"] || "New Project"
+  leadText = ENV["description"] || "Project Description"
+  name = "index.md"
+  filename = File.join(SOURCE, "#{name}")
+  pageTitle = "NaN Labs - " + title
+  if File.exist?(filename)
+    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+  end
+  
+  mkdir_p File.dirname(filename)
+  puts "Creating new page: #{filename}"
+  open(filename, 'w') do |project|
+    project.puts "---"
+    project.puts "layout: project"
+    project.puts "page: project"
+    project.puts "title: \"#{pageTitle}\""
+    project.puts "description: \"#{leadText}\""
+    project.puts 'home-text: Home'
+    project.puts 'footer-title: Get in touch'
+    project.puts 'logoImg: logo-195x120.png'
+    project.puts 'section: project'
+    project.puts "header: \"#{title}\""
+    project.puts "lead-text: \"#{leadText}\""
+    project.puts "---"
+    project.puts 'Documentation and examples of the project.'
+    
+  end
+end # task :page
+
 desc "Launch preview environment"
 task :preview do
   system "jekyll --auto --server"
