@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Not Found</title>
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- The application runs in full-screen mode in Safari -->
+    <meta content='yes' name='apple-mobile-web-app-capable' />
+    <meta content='black' name='apple-mobile-web-app-status-bar-style' />
+
+    <link rel="apple-touch-icon" href="{{ ASSET_PATH }}/img/apple-touch-icon-iphone.png" /> 
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ ASSET_PATH }}/img/apple-touch-icon-ipad.png" /> 
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ ASSET_PATH }}/img/apple-touch-icon-iphone4.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ ASSET_PATH }}/img/apple-touch-icon-ipad3.png" />
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/nanlabs/css/style.less" rel="stylesheet/less">
+    <script src="/assets/themes/nanlabs/js/less-1.3.1.min.js"></script>
+    <script src="/assets/themes/nanlabs/js/jquery-1.9.1.min.js"></script>
+    <script src="/assets/themes/nanlabs/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript"> function delayer() {window.location = "http://nan-labs.com"} </script>
+
+  </head>
+
+  <body onLoad="setTimeout('delayer()', 5000)">
+
+    <div class="container-narrow">
+
+      <div class="content">
+        <div class="page-header clearfix">
+		  <h1>Not Found</h1>
+		</div>
+
+		<div class="row-fluid">
+		  <div class="span12">
+		    <p>This page does not exists.</p>
+		    <p>You will be redirected momentarily...</p>
+		  </div>
+		</div>
+      </div>
+    </div>
+    <footer class="fixed-footer">
+        <div class="container-narrow">
+            <div class="row-fluid">
+                <div class="link-container span4">
+                    <ul>
+						<li><a href="https://twitter.com/nanlabs" target="_blank"><span class="text-icon">&#93;</span> <span class="text-link">twitter.com/nanlabs</span></a></li>
+						<li><a href="https://www.facebook.com/nanlabs" target="_blank"><span class="text-icon">&#89;</span> <span class="text-link">facebook.com/nanlabs</span></a></li>
+						<li><a href="https://github.com/nanlabs" target="_blank"><span class="text-icon">&#106;</span> <span class="text-link">github.com/nanlabs</span></a></li>
+						<li><a href="http://www.linkedin.com/company/3144073?trk=tyah" target="_blank"><span class="text-icon">&#119;</span> <span class="text-link">linkedin</span></a></li>
+					</ul>
+                </div>
+                <div class="span4 text-right pull-right">
+                    <p><a href="mailto:contact@nan-labs.com">contact@nan-labs.com</a></p>
+                    <p>Argentina</p>
+                    <p class="copyright">&copy; 2013 NaN Labs</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  	<script type="text/javascript">
+  		var _gaq = _gaq || [];
+  		_gaq.push(['_setAccount', 'UA-41378786-1']);
+  		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+  </body>
+</html>
+

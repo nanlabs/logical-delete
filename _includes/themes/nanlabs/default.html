@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    {% if page.description %}<meta name="description" property="og:description" content="{{ page.description }}">{% endif %}
+    <meta name="author" content="{{ site.author.name }}">
+
+    <!-- Open Graph card -->
+    <meta property="og:title" content="NaN Labs" />
+    <meta property="og:type" content="company" />
+    <meta property="og:site_name" content="NaN Labs" />
+    <meta property="og:url" content="http://nan-labs.com" />
+    <meta property="og:image" content="http://nan-labs.com{{ ASSET_PATH }}/img/logo.png" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@nanlabs" />
+    <meta name="twitter:title" content="NaN Labs" />
+    <meta name="twitter:image" content="http://nan-labs.com{{ ASSET_PATH }}/img/logo.png" />
+    <meta name="twitter:description" content="We're a group of developers highly trained and experienced in the IT industry. We're really demanding on the quality and we aim for excellence." />
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- The application runs in full-screen mode in Safari -->
+    <meta content='yes' name='apple-mobile-web-app-capable' />
+    <meta content='black' name='apple-mobile-web-app-status-bar-style' />
+
+    <link rel="apple-touch-icon" href="{{ ASSET_PATH }}/img/apple-touch-icon-iphone.png" /> 
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ ASSET_PATH }}/img/apple-touch-icon-ipad.png" /> 
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ ASSET_PATH }}/img/apple-touch-icon-iphone4.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ ASSET_PATH }}/img/apple-touch-icon-ipad3.png" />
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="{{ ASSET_PATH }}/css/style.less" rel="stylesheet/less">
+    <!--[if IE 7]>
+        <link href="{{ ASSET_PATH }}/css/style-ie7.less" rel="stylesheet/less">
+    <![endif]-->
+    <script src="{{ ASSET_PATH }}/js/less-1.3.1.min.js"></script>
+    <script src="{{ ASSET_PATH }}/js/jquery-1.9.1.min.js"></script>
+    <script src="{{ ASSET_PATH }}/js/bootstrap.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <section class="container-fluid">
+        <section class="row-fluid">
+            <div class="span12 site">
+                {% include themes/nanlabs/header.html %}
+
+                <section class="row-fluid content">
+                  <div class="span12 {{ page.section }}">
+                    {{ content }}
+                  </div>
+                </section>
+
+                {% include themes/nanlabs/footer.html %}
+            </div>
+        </section>
+    </section>
+    
+    {% include JB/analytics %}
+  </body>
+</html>

@@ -1,0 +1,172 @@
+@import "bootstrap";
+@import "bootstrap-responsive";
+@import "fonts";
+@import "font-awesome-ie7";
+
+@brandColor: #0AAFAC;
+@brandColorDarker: darken(desaturate(@brandColor,20%), 20%);
+@brandColorDark: darken(desaturate(@brandColor,15%), 10%);
+@brandColorLight: lighten(desaturate(@brandColor,60%), 1%);
+@brandColorLighter: lighten(desaturate(@brandColor,45%), 25%);
+@brandColorPale: lighten(desaturate(@brandColor,0%), 56%);
+
+@titleFontFamily: Rokkitt-Regular;
+@textFontFamily: NotoSans-Regular;
+
+body {
+	background-color: #F5F5F2;
+}
+
+body:before {
+	position: absolute;
+	top: 0;
+	height: 10px;
+	left: 0;
+	width: 100%;
+	background: @brandColor;
+	content: "";
+	margin: 0;
+	padding: 0;
+	z-index: 999999;
+}
+
+.container-narrow {
+    margin: 0 auto;
+	max-width: 700px; 
+	padding: 0 20px;
+}
+
+h1, h2 {
+	font-family: @titleFontFamily;
+}
+
+.content h2 {
+	font-size: 28px;
+}
+
+p, li, a {
+	font-family: @textFontFamily;
+}
+
+div.text-right p {
+	text-align: right;
+}
+
+.text-strike {
+	text-decoration: line-through;
+}
+
+.page-header {
+
+	h1 {
+		float: left;
+	}
+
+	img {
+		height: 50px;
+		float: right;	
+	}
+}
+
+.link-container {
+	ul {
+		margin: 0;
+
+		li {
+			list-style: none;
+
+			a {
+				line-height: 40px;
+			}
+		}
+	}
+}
+
+footer {
+
+	margin-top: 40px;
+	background-color: @brandColorDarker;
+
+	p, a {
+		color: white;
+	}
+
+	a:hover {
+		color: @brandColorLighter;
+		text-decoration: none;
+	}
+
+	p.copyright {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+
+	div.row-fluid {
+		position: relative;
+	}
+
+	> .container-narrow {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+}
+
+footer.fixed-footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+@media (max-width: 767px) {
+  	body {
+    	padding-right:0;
+    	padding-left:0;
+  	}
+
+  	footer {
+
+  		.row-fluid [class*="span"] {
+		  	width: 40.42553191489362%;
+		  	*width: 40.37234042553192%;
+		  	float: left;
+		}
+  	}
+}
+
+@media (max-width: 568px) {
+	span.text-link {
+		display: none !important;
+	}
+}
+
+@media (max-width: 320px) {
+
+	footer {
+		.row-fluid [class*="span"] {
+			float: none;
+			width: 100%;
+		}
+
+		p.copyright {
+  			position: static;
+  		}
+
+		div.text-right p {
+			text-align: left;
+		}
+
+		.link-container {
+			ul li {
+				float: left;
+				margin: 0 6%;
+			}
+		}
+	}
+}
+
+@media (max-width: 240px) {
+	footer .link-container ul li {
+		margin: 0 3.49%;
+	}
+}

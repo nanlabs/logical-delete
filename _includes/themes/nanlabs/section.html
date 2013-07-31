@@ -1,0 +1,28 @@
+<nav class="row-fluid content-header">
+	<header class="span10 box-{{page.section}} area">
+		<h2 class="pull-left">{{ page.section-title }}</h2>
+	</header>
+	<div class="span1 box-{{ page.link1-name }}">
+		<a href="{{ page.link1-name }}.html" title="{{ page.link1-title }}">
+			<section class="span12 area">
+				<h1><strong class="icon-{{ page.link1-icon }}"></strong></h1>
+			</section>
+		</a>
+	</div>
+	<div class="span1 box-{{ page.link2-name }}">
+		<a href="{{ page.link2-name }}.html" title="{{ page.link2-title }}">
+			<section class="span12 area">
+				<h1><strong class="icon-{{ page.link2-icon }}"></strong></h1>
+			</section>
+		</a>
+	</div>
+</nav>
+
+<div class="row-fluid">
+	<article class="span12">
+		<p class="lead">{{ page.lead-text }}</p>
+		<section>
+	      {{ content }}
+	    </section>
+	</article>
+</div>
