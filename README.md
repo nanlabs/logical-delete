@@ -1,4 +1,4 @@
-test-theme
+NaN Labs Jekyll Bootstrap
 ==========
 
-Repo to test theme from Jekyll
+Jekyll Bootstrap using NaN Labs theme
