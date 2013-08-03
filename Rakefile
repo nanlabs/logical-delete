@@ -96,11 +96,12 @@ task :page do
   end
 end # task :page
 
-# Usage: rake project title="Project Title" description="Project description"
+# Usage: rake project title="Project Title" description="Project description" repo-url="RepoURL"
 desc "Create a new project site page."
 task :project do
   title = ENV["title"] || "New Project"
   leadText = ENV["description"] || "Project Description"
+  repoURL = ENV["repo-url"]
   name = "index.md"
   filename = File.join(SOURCE, "#{name}")
   pageTitle = "NaN Labs - " + title
@@ -122,6 +123,7 @@ task :project do
     project.puts 'section: project'
     project.puts "header: \"#{title}\""
     project.puts "lead-text: \"#{leadText}\""
+    project.puts "github-url: \"#{repoURL}\""
     project.puts "---"
     project.puts 'Documentation and examples of the project.'
     
