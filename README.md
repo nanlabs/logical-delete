@@ -5,4 +5,4 @@ Jekyll Bootstrap using NaN Labs theme
 
 To create a project page run:
 
-rake project title="project-name" [description="project-description"] [repo-url="project-repository-url"]
+rake project title="project-name" [description="project-description"] [repourl="project-repository-url"]
