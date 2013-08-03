@@ -67,6 +67,9 @@
                         </article>
                     </div>
                   </div>
+
+                  {% if page.github-url %}<div class="span12 github-link-container"><a class="btn" href="{{ page.github-url }}" target="_blank"><i class="icon-github"></i> Project on GitHub</a></div>{% endif %}
+
                 </section>
 
                 {% include themes/nanlabs/footer.html %}
