@@ -9,7 +9,7 @@ import org.hibernate.engine.FilterDefinition;
 
 @HawkEventConsumer
 public class DeleteHibernateFilterEnabler {
-	
+
 	private FilterDefinition deleteHibernateFilter;
 
 	@Consuming("hibernate.sessionCreated")
@@ -17,7 +17,7 @@ public class DeleteHibernateFilterEnabler {
 		Session session = (Session) event.getPayload();
 		session.enableFilter(deleteHibernateFilter.getFilterName());
 	}
-	
+
 	public void setDeleteHibernateFilter(FilterDefinition deleteHibernateFilter) {
 		this.deleteHibernateFilter = deleteHibernateFilter;
 	}
