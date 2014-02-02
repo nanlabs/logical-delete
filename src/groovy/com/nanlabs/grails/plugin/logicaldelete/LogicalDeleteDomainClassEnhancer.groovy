@@ -1,5 +1,6 @@
 package com.nanlabs.grails.plugin.logicaldelete
 
+import org.hibernate.engine.FilterDefinition
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -8,21 +9,42 @@ class LogicalDeleteDomainClassEnhancer {
 	private static final Logger log = LoggerFactory.getLogger(this)
 
 	private static final String PHYSICAL_PARAM = 'physical'
+	
+	FilterDefinition logicDeleteHibernateFilter
 
-	static void enhance(domainClasses){
-		for(domainClass in domainClasses){
+	static void enhance(domainClasses) {
+		for (domainClass in domainClasses) {
 			Class clazz = domainClass.clazz
-			if(mustBeEnhanced(clazz)){
+			if (mustBeEnhanced(clazz)) {
 				changeDeleteMethod(clazz)
+				addListDeletedMethod(clazz)
 			}
 		}
 	}
 
-	private static boolean mustBeEnhanced(clazz){
+	private static boolean mustBeEnhanced(clazz) {
 		LogicalDeleteDomainClass.isAssignableFrom(clazz)
 	}
+	
+	private static void addListDeletedMethod(clazz) {
+		log.debug "Adding listDeleted method to $clazz"
+		
+		ExpandoMetaClass mc = org.codehaus.groovy.grails.commons.GrailsMetaClassUtils.getExpandoMetaClass(clazz)
+		def staticScope = mc.static
+		def gormListMethod = clazz.metaClass.getMetaMethod('list')
+		def gormListWithArgsMethod = clazz.metaClass.getMetaMethod('list', Map)
+		
+		clazz.metaClass.withDeleted = { Closure closure ->
+			session.disableFilter(logicDeleteHibernateFilter.filterName)
+			try {
+				closure()
+			} finally {
+				session.enableFilter(logicDeleteHibernateFilter.filterName)
+			}
+		}
+	}
 
-	private static void changeDeleteMethod(clazz){
+	private static void changeDeleteMethod(clazz) {
 		log.debug "Adding logic delete support to $clazz"
 		def gormSaveMethod = clazz.metaClass.getMetaMethod('save')
 		def gormDeleteMethod = clazz.metaClass.getMetaMethod('delete')
@@ -35,13 +57,13 @@ class LogicalDeleteDomainClassEnhancer {
 
 		clazz.metaClass.delete = { Map m ->
 			if(m[PHYSICAL_PARAM]){
-				if(m.count{true} > 1){
+				if (m.count{true} > 1) {
 					def args = m.dropWhile {it.key == PHYSICAL_PARAM}
 					gormDeleteWithArgsMethod.invoke(delegate, args)
-				}else{
+				} else {
 					gormDeleteMethod.invoke(delegate)
 				}
-			}else{
+			} else {
 				curriedDelete(delegate, m)
 			}
 		}
@@ -50,6 +72,6 @@ class LogicalDeleteDomainClassEnhancer {
 	private static deleteAction = { aSave, aDelegate, args = null ->
 		log.debug "Applying logical delete to domain class ${aDelegate.class}"
 		aDelegate.deleted = true
-		if(args) aSave.invoke(aDelegate) else aSave.invoke(aDelegate, args)
+		if (args) aSave.invoke(aDelegate) else aSave.invoke(aDelegate, args)
 	}
 }

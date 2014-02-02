@@ -5,7 +5,7 @@ import com.nanlabs.grails.plugin.logicaldelete.DeleteHibernateFilterEnabler
 import com.nanlabs.grails.plugin.logicaldelete.LogicalDeleteDomainClassEnhancer
 
 class LogicalDeleteGrailsPlugin {
-	def version = "0.1"
+	def version = "0.2"
 	def grailsVersion = "2.0 > *"
 	def title = "Logical Delete Plugin"
 	def description = 'Allows you to do a logical deletion of domain classes'
