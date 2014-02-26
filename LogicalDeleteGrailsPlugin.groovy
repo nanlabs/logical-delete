@@ -36,6 +36,7 @@ class LogicalDeleteGrailsPlugin {
 	}
 
 	def doWithDynamicMethods = { ctx ->
+		LogicalDeleteDomainClassEnhancer.setLogicDeleteFilter(ctx.getBean("logicDeleteHibernateFilter"))
 		LogicalDeleteDomainClassEnhancer.enhance(application.domainClasses)
 	}
 }

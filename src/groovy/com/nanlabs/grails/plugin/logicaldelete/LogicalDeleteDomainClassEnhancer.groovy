@@ -10,7 +10,11 @@ class LogicalDeleteDomainClassEnhancer {
 
 	private static final String PHYSICAL_PARAM = 'physical'
 	
-	FilterDefinition logicDeleteHibernateFilter
+	private static FilterDefinition logicDeleteHibernateFilter
+	
+	static void setLogicDeleteFilter(FilterDefinition logicDeleteFilter) {
+		logicDeleteHibernateFilter = logicDeleteFilter
+	}
 
 	static void enhance(domainClasses) {
 		for (domainClass in domainClasses) {
@@ -29,19 +33,18 @@ class LogicalDeleteDomainClassEnhancer {
 	private static void addListDeletedMethod(clazz) {
 		log.debug "Adding listDeleted method to $clazz"
 		
-		ExpandoMetaClass mc = org.codehaus.groovy.grails.commons.GrailsMetaClassUtils.getExpandoMetaClass(clazz)
-		def staticScope = mc.static
-		def gormListMethod = clazz.metaClass.getMetaMethod('list')
-		def gormListWithArgsMethod = clazz.metaClass.getMetaMethod('list', Map)
-		
-		clazz.metaClass.withDeleted = { Closure closure ->
-			session.disableFilter(logicDeleteHibernateFilter.filterName)
+		clazz.metaClass.static.withDeleted = { Closure closure ->
+			delegate.withSession { session ->
+				session.disableFilter(logicDeleteHibernateFilter.filterName)
+			}
 			try {
 				closure()
 			} finally {
-				session.enableFilter(logicDeleteHibernateFilter.filterName)
+				delegate.withSession { session ->
+					session.enableFilter(logicDeleteHibernateFilter.filterName)
+				}
 			}
-		}
+		}		
 	}
 
 	private static void changeDeleteMethod(clazz) {

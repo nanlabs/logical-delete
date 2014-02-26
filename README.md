@@ -36,3 +36,11 @@ If you want to force a physical deletion to an annotated class, you have to add 
 ```groovy
 user.delete(physical: true)
 ```
+
+If you want to use the __logically__ deleted elements, you can use the _withDeleted_ method to execute a closure that includes the deleted items:
+
+```groovy
+user.withDeleted {
+	def deletedUserList = User.list()
+}
+```
