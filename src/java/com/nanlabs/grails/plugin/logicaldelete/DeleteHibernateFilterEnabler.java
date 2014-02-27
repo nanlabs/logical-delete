@@ -11,11 +11,13 @@ import org.hibernate.engine.FilterDefinition;
 public class DeleteHibernateFilterEnabler {
 
 	private FilterDefinition deleteHibernateFilter;
+	
+	private static final String DELETED_PARAM = "deletedValue";
 
 	@Consuming("hibernate.sessionCreated")
 	public void enableDeleteHibernateFilter(Event event){
 		Session session = (Session) event.getPayload();
-		session.enableFilter(deleteHibernateFilter.getFilterName());
+		session.enableFilter(deleteHibernateFilter.getFilterName()).setParameter(DELETED_PARAM, false);
 	}
 
 	public void setDeleteHibernateFilter(FilterDefinition deleteHibernateFilter) {

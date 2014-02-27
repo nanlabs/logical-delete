@@ -23,7 +23,8 @@ class LogicalDeleteGrailsPlugin {
 	def doWithSpring = {
 
 		logicDeleteHibernateFilter(FilterDefinitionFactoryBean) {
-			defaultFilterCondition = "deleted = 0"
+			defaultFilterCondition = "deleted = :deletedValue"
+			parameterTypes = [deletedValue: "boolean"]
 		}
 
 		deleteHibernateFilterConfigurator(DeleteHibernateFilterConfigurator) {

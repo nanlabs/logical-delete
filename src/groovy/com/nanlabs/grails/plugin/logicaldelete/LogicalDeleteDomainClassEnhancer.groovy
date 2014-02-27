@@ -10,6 +10,8 @@ class LogicalDeleteDomainClassEnhancer {
 
 	private static final String PHYSICAL_PARAM = 'physical'
 	
+	private static final String DELETED_PARAM = 'deletedValue'
+	
 	private static FilterDefinition logicDeleteHibernateFilter
 	
 	static void setLogicDeleteFilter(FilterDefinition logicDeleteFilter) {
@@ -31,7 +33,7 @@ class LogicalDeleteDomainClassEnhancer {
 	}
 	
 	private static void addListDeletedMethod(clazz) {
-		log.debug "Adding listDeleted method to $clazz"
+		log.debug "Adding withDeleted method to $clazz"
 		
 		clazz.metaClass.static.withDeleted = { Closure closure ->
 			delegate.withSession { session ->
@@ -41,7 +43,7 @@ class LogicalDeleteDomainClassEnhancer {
 				closure()
 			} finally {
 				delegate.withSession { session ->
-					session.enableFilter(logicDeleteHibernateFilter.filterName)
+					session.enableFilter(logicDeleteHibernateFilter.filterName).setParameter(DELETED_PARAM, false)
 				}
 			}
 		}		
